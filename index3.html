@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="EFG.ico" href="EFG.ico"/>
+  <title>EFG | Nᴇᴡs</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    .header {
+      background-color: #28df74;
+      padding: 10px;
+    }
+
+
+    .logo {
+      height: 50px;
+    }
+    
+    .container {
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    /* Container de Tabs */
+    .tabs {
+      display: flex;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      justify-content: space-around;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      flex: 1;
+      text-align: center;
+      font-size: 1.2em;
+      border-radius: 8px;
+      background-color: #28a745;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: #218838;
+    }
+
+    .tab.active {
+      background-color: #218838;
+    }
+
+    .turma-content {
+      display: none;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .turma-content.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .table-header {
+      font-size: 1.2em;
+    }
+
+    .table-data {
+      font-size: 1em;
+    }
+
+    .days {
+      display: flex;
+      justify-content: space-around;
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .day {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .day:hover {
+      background-color: #ddd;
+    }
+
+    .day.active {
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html">
+        <img src="LogoEFG.png" alt="Logo" class="logo">
+    </a>
+</header>
+
+  <div class="container">
+    
+    <!-- Container de abas -->
+    <div class="tabs">
+      <div class="tab active" onclick="showContent('turma-1A')">1°A</div>
+     
+    </div>
+
+    <!-- Conteúdo de cada turma -->
+    <!-- Turma 1°A -->
+    <div id="turma-1A" class="turma-content active">
+      <h2>1°A</h2>
+     
+      <div id="turma-1A-segunda" class="day-schedule active">
+        <table>
+          <thead>
+            <tr>
+              <th class="table-header">Hora</th>
+              <th class="table-header">Disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>07:30</td><td>Avaliação</td></tr>
+            <tr><td>08:20</td><td>Avaliação</td></tr>
+           
+          </tbody>
+        </table>
+      </div>
+      <div id="turma-1A-terca" class="day-schedule">
+        <table>
+          <thead>
+            <tr>
+              <th class="table-header">Hora</th>
+              <th class="table-header">Disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>9:25</td><td>E.O Matemática</td></tr>
+            <tr><td>10:15</td><td>E.O Matemática</td></tr>
+            <tr><td>11:05</td><td>Biologia</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="turma-1A-quarta" class="day-schedule">
+        <table>
+          <thead>
+            <tr>
+              <th class="table-header">Hora</th>
+              <th class="table-header">Disciplina</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>13:25</td><td>Português</td></tr>
+            <tr><td>14:15</td><td>Matematica</td></tr>
+          </tbody>
+        </table>
+</div>
+<div id="turma-1A-quarta" class="day-schedule">
+    <table>
+      <thead>
+        <tr>
+          <th class="table-header">Hora</th>
+          <th class="table-header">Disciplina</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>15:20</td><td>Matematica</td></tr>
+        <tr><td>16:10</td><td>Biologia</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+
+    
+  </div>
+
+  <script>
+   // Função para alternar entre as turmas
+function showContent(turmaId) {
+  const tabs = document.querySelectorAll('.tab');
+  const turmaContents = document.querySelectorAll('.turma-content');
+
+  tabs.forEach(tab => tab.classList.remove('active'));
+  turmaContents.forEach(content => content.classList.remove('active'));
+
+  document.querySelector(`#${turmaId}`).classList.add('active');
+  document.querySelector(`[onclick="showContent('${turmaId}')"]`).classList.add('active');
+}
+
+
+ 
+
+  
+  </script>
+</body>
+</html>

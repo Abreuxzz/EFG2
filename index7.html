@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="EFG.ico" href="EFG.ico"/>
+  <title>EFG | Nᴇᴡs</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      background-color: #28df74;
+      padding: 10px;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      padding: 20px;
+      flex-grow: 1;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .grid-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #ddd;
+      color: #333;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      width: 30vw;
+      height: 40vh;
+      border: 2px solid #ccc;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .grid-item:hover {
+      background-color: #fffdfd;
+      color: #000000;
+      border-color: #0056b3;
+    }
+
+    .grid-item img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: absolute;
+      top: 50%;
+      left: 105%; /* Exibe o tooltip à direita */
+      transform: translateY(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .grid-item:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    .hidden-button-container {
+            position: fixed;
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta a posição para o centro exato */
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Estiliza o botão */
+        .hidden-button {
+            width: 100%;
+            height: 100%;
+            background-color: #007BFF; /* Cor de fundo do botão */
+            border: none;
+            border-radius: 50%; /* Torna o botão circular */
+            opacity: 0; /* Inicialmente invisível */
+            transition: opacity 0.3s ease; /* Transição suave */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estiliza o ícone ou texto dentro do botão */
+        .hidden-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        /* Quando o contêiner é hover, torna o botão visível */
+        .hidden-button-container:hover .hidden-button {
+            opacity: 1;
+        }
+
+        /* Opcional: muda a cor do botão ao passar o mouse */
+        .hidden-button:hover {
+            background-color: #0056b3;
+        }
+
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html">
+        <img src="LogoEFG.png" alt="Logo" class="logo">
+    </a>
+</header>
+<div class="hidden-button-container">
+  <button class="hidden-button">
+      <!-- Link dentro do botão -->
+      <a href="index4.html" target="_blank" title="Ir para o link">
+          &#10148; <!-- Caractere Unicode para uma seta direita -->
+      </a>
+  </button>
+</div>
+
+<main class="grid-container">
+    <a href="index5.html" class="grid-item">
+      <img src="calendar.png" alt="Calendário">
+      Calendário
+      <div class="tooltip">Visualize os eventos e datas importantes.</div>
+    </a>
+    <a href="index2.html" class="grid-item">
+      <img src="human.png" alt="Protagonismo Juvenil">
+     Eventos
+      <div class="tooltip">Informações sobre o PJS.</div>
+    </a>
+    <a href="index3.html" class="grid-item">
+      <img src="hours.png" alt="Horários">
+      Horários
+      <div class="tooltip">Consulte os horários disponíveis.</div>
+    </a>
+    <a href="index6.html" class="grid-item">
+      <img src="cardapio.png" alt="Cardápio">
+      Cardápio
+      <div class="tooltip">Confira o cardápio semanal.</div>
+    </a>
+  </main>
+  <script>
+    // Adicione interatividade adicional aqui, se necessário.
+    console.log('Tela inicial carregada!');
+  </script>
+</body>
+</html>

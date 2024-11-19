@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="EFG.ico" href="EFG.ico"/>
+  <title>EFG | Nᴇᴡs</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #d1f1fc;
+      font-family: Arial, sans-serif;
+    }
+
+    #game {
+      position: relative;
+      width: 800px;
+      height: 400px;
+      background: #fff;
+      border: 2px solid #000;
+      overflow: hidden;
+    }
+
+    #score, #max-score {
+      position: absolute;
+      top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    #score {
+      left: 10px;
+    }
+
+    #max-score {
+      right: 10px;
+    }
+
+    #ball {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      width: 50px;
+      height: 50px;
+      background: url('images.png') no-repeat center/contain;
+      border-radius: 50%;
+    }
+
+    #obstacle {
+      position: absolute;
+      bottom: 50px;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      background: url('Preguiça.png') no-repeat center/contain;
+      animation: moveObstacle 2s linear infinite;
+    }
+
+    @keyframes moveObstacle {
+      from {
+        right: -50px;
+      }
+      to {
+        right: 800px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <div id="score">Pontos: 0</div>
+    <div id="max-score">Máximo: 0</div>
+    <div id="ball"></div>
+    <div id="obstacle"></div>
+  </div>
+  <script>
+    const ball = document.getElementById('ball');
+    const obstacle = document.getElementById('obstacle');
+    const scoreDisplay = document.getElementById('score');
+    const maxScoreDisplay = document.getElementById('max-score');
+    let isJumping = false;
+    let score = 0;
+    let maxScore = localStorage.getItem('maxScore') || 0;
+    let obstacleSpeed = 2; // Velocidade inicial (em segundos)
+    let obstacleSize = 50; // Tamanho inicial do obstáculo
+    let jumpHeight = 150; // Altura inicial do salto
+    let levelUpPoints = 5; // Pontos necessários para subir de nível
+
+    maxScoreDisplay.textContent = `Máximo: ${maxScore}`;
+
+    // Função para pular
+    function jump() {
+      if (isJumping) return;
+      isJumping = true;
+
+      let height = 0;
+      const upInterval = setInterval(() => {
+        if (height >= jumpHeight) {
+          clearInterval(upInterval);
+          const downInterval = setInterval(() => {
+            if (height <= 0) {
+              clearInterval(downInterval);
+              isJumping = false;
+            }
+            height -= 5;
+            ball.style.bottom = `${50 + height}px`;
+          }, 20);
+        }
+        height += 5;
+        ball.style.bottom = `${50 + height}px`;
+      }, 20);
+    }
+
+    // Detectar colisão
+    function checkCollision() {
+      const ballRect = ball.getBoundingClientRect();
+      const obstacleRect = obstacle.getBoundingClientRect();
+
+      if (
+        ballRect.right > obstacleRect.left &&
+        ballRect.left < obstacleRect.right &&
+        ballRect.bottom > obstacleRect.top
+      ) {
+        alert(`Game Over! Pontuação final: ${score}`);
+        if (score > maxScore) {
+          maxScore = score;
+          localStorage.setItem('maxScore', maxScore);
+        }
+        window.location.reload();
+      }
+    }
+
+    // Atualizar pontuação
+    function updateScore() {
+      const obstacleRect = obstacle.getBoundingClientRect();
+      if (obstacleRect.right < ball.getBoundingClientRect().left) {
+        score++;
+        scoreDisplay.textContent = `Pontos: ${score}`;
+
+        // Aumentar dificuldade a cada múltiplo de "levelUpPoints"
+        if (score % levelUpPoints === 0) {
+          // Reduz a duração da animação (aumentando a velocidade) até um limite seguro
+          if (obstacleSpeed > 1.2) {
+            obstacleSpeed *= 0.95;
+            obstacle.style.animationDuration = `${obstacleSpeed}s`;
+          }
+
+          // Aumenta o tamanho do obstáculo moderadamente
+          if (obstacleSize < 80) {
+            obstacleSize += 5;
+            obstacle.style.width = `${obstacleSize}px`;
+            obstacle.style.height = `${obstacleSize}px`;
+          }
+
+          // Aumenta a altura do salto para acompanhar o aumento da dificuldade
+          if (jumpHeight < 200) {
+            jumpHeight += 10;
+          }
+        }
+      }
+    }
+
+    // Evento de tecla para pular
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Space') jump();
+    });
+
+    // Verifica colisão continuamente
+    setInterval(() => {
+      checkCollision();
+      updateScore();
+    }, 50);
+  </script>
+</body>
+</html>

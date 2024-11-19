@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="EFG.ico" href="EFG.ico"/>
+    <title>EFG | Nᴇᴡs</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f8f6;
+            color: #333;
+            line-height: 1.8;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+      /* Header */
+/* Header */
+.header {
+    background-color: #28df74;
+    width: 100%; /* Garantir que o header ocupe toda a largura */
+    padding: 20px; /* Aumenta o padding do cabeçalho */
+    display: flex;
+    align-items: center; /* Alinha a logo verticalmente no centro */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    height: 70px;
+}
+
+.logo {
+    height: 50px; /* Ajuste a altura conforme necessário */
+}
+
+
+
+        .calendar-container {
+            width: 85%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px; /* Distância do header */
+        }
+
+        h1 {
+            text-align: center;
+            color: #388e3c;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav button {
+            padding: 10px 20px;
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .calendar-nav button:hover {
+            background-color: #2e7d32;
+        }
+
+        .month-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #388e3c;
+            margin-bottom: 20px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            padding: 10px;
+            border-radius: 20px; /* Cantos arredondados */
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .calendar-day:hover {
+            transform: translateY(-5px);
+        }
+
+        .weekend {
+            background-color: #4caf50; /* Verde para fins de semana */
+            color: white;
+        }
+
+        .holiday {
+            background-color: #f44336; /* Vermelho para feriados */
+            color: white;
+            font-weight: bold;
+        }
+
+        .school-day {
+            background-color: #2196f3; /* Azul para dias letivos */
+            color: white;
+        }
+
+        .selected-day {
+            background-color: #81c784; /* Cor de destaque para o dia selecionado */
+        }
+
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 10px;
+        }
+
+        .note textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #388e3c;
+            font-size: 1rem;
+            resize: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #388e3c;
+            color: white;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+    <header class="header">
+        <a href="index.html">
+            <img src="LogoEFG.png" alt="Logo" class="logo">
+        </a>
+    </header>
+    
+    <div class="calendar-container">
+        <h1>Calendário 2024 </h1>
+
+        <div class="calendar-header">
+            <div class="calendar-nav">
+                <button id="prevMonth">Anterior</button>
+                <button id="nextMonth">Próximo</button>
+            </div>
+            <div class="month-name" id="monthName"></div>
+        </div>
+
+        <div id="calendar" class="calendar-grid"></div>
+
+        <div class="note">
+            <h2>Notas para o dia selecionado</h2>
+            <textarea id="noteText" placeholder="Adicione uma nota para o dia selecionado..."></textarea>
+        </div>
+
+       
+    </div>
+
+    <script>
+        const holidays = [
+            // Feriados Nacionais
+            { date: "2024-01-01", name: "Ano Novo" },
+            { date: "2024-02-25", name: "Carnaval" },
+            { date: "2024-02-26", name: "Carnaval" },
+            { date: "2024-03-29", name: "Sexta-feira Santa" },
+            { date: "2024-04-21", name: "Tiradentes" },
+            { date: "2024-05-01", name: "Dia do Trabalho" },
+            { date: "2024-06-15", name: "Festa Junina" },
+            { date: "2024-09-07", name: "Independência do Brasil" },
+            { date: "2024-10-12", name: "Nossa Senhora Aparecida" },
+            { date: "2024-11-02", name: "Finados" },
+            { date: "2024-11-15", name: "Proclamação da República" },
+            { date: "2024-12-25", name: "Natal" },
+
+            // Feriados Municipais de Valparaíso de Goiás
+            { date: "2024-03-06", name: "Dia de Valparaíso de Goiás" },
+            { date: "2024-10-28", name: "Dia do Servidor Público" }
+        ];
+
+        const weekends = [0, 6]; // Domingo (0) e Sábado (6)
+        const months = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        let currentMonth = new Date().getMonth(); // Mês atual
+        let currentYear = 2024; // Ano fixo (2024)
+        let selectedDay = null; // Para armazenar o dia selecionado
+
+        const calendarElement = document.getElementById('calendar');
+        const monthNameElement = document.getElementById('monthName');
+        const noteTextArea = document.getElementById('noteText');
+
+        function generateCalendar(month, year) {
+            // Limpar o calendário atual
+            calendarElement.innerHTML = '';
+            monthNameElement.textContent = months[month] + " " + year;
+
+            // Configurar o primeiro dia do mês e o número de dias no mês
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+
+            // Gerar os dias da semana
+            const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            daysOfWeek.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.textContent = day;
+                calendarElement.appendChild(dayElement);
+            });
+
+            // Preencher os dias
+            for (let i = 0; i < firstDay; i++) {
+                calendarElement.appendChild(document.createElement('div')); // Espaço vazio
+            }
+
+            for (let day = 1; day <= lastDate; day++) {
+                const dayElement = document.createElement('div');
+                const currentDate = new Date(year, month, day);
+                const dateString = currentDate.toISOString().split('T')[0];
+
+                dayElement.textContent = day;
+
+                // Marcar os fins de semana
+                if (weekends.includes(currentDate.getDay())) {
+                    dayElement.classList.add('weekend');
+                }
+
+                // Marcar os feriados
+                if (holidays.some(holiday => holiday.date === dateString)) {
+                    dayElement.classList.add('holiday');
+                } else if (!weekends.includes(currentDate.getDay())) {
+                    dayElement.classList.add('school-day');
+                }
+
+                // Marcar o dia selecionado
+                dayElement.addEventListener('click', () => {
+                    if (selectedDay) {
+                        selectedDay.classList.remove('selected-day');
+                    }
+                    selectedDay = dayElement;
+                    selectedDay.classList.add('selected-day');
+                    noteTextArea.value = ''; // Limpar nota ao selecionar novo dia
+                });
+
+                calendarElement.appendChild(dayElement);
+            }
+        }
+
+        // Navegação entre meses
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        // Gerar o calendário inicial
+        generateCalendar(currentMonth, currentYear);
+
+        document.querySelector('.logo').addEventListener('click', () => {
+    window.location.href = 'index.html'; // Caminho da página inicial
+});
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

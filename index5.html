@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="EFG.ico" href="EFG.ico"/>
+    <title>EFG | Nᴇᴡs</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f8f6; /* Cor de fundo mais suave */
+            color: #333; /* Contraste melhorado */
+            line-height: 1.8;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #28df74;
+            padding: 10px; /* Aumenta o padding do cabeçalho */
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 100px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding-top: 80px; /* Afastando mais o cardápio do topo */
+        }
+
+        h1 {
+            text-align: center;
+            color: #388e3c;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .day {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .meal {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #c8e6c9;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+        }
+
+        .meal h3 {
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+
+        .meal p {
+            font-size: 1.2rem;
+        }
+
+        .day:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .meal:hover {
+            background-color: #a5d6a7;
+            transform: translateX(5px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #388e3c;
+            color: white;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .tech-icon {
+            font-size: 2.2rem;
+            color: #4caf50;
+            margin-left: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            color: #2e7d32;
+        }
+
+        /* Media Query para telas menores */
+        @media (max-width: 768px) {
+            .menu-container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .day h2 {
+                font-size: 2rem;
+            }
+
+            .meal h3 {
+                font-size: 1.5rem;
+            }
+
+            .meal p {
+                font-size: 1rem;
+            }
+
+            .logo {
+                height: 40px;
+            }
+
+            .tech-icon {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html">
+            <img src="LogoEFG.png" alt="Logo" class="logo">
+        </a>
+    </header>
+    
+    <div class="menu-container">
+        <h1>Cardápio Marajó e Futuro</h1>
+
+        <div class="day">
+            <h2>Segunda-feira</h2>
+            <div class="meal">
+                <h3>Lanche da manhã</h3>
+                <p>Cuscuz com manteiga e suco.</p>
+            </div>
+            <div class="meal">
+                <h3>Almoço</h3>
+                <p>Arroz, estrogonofe, batata palha e salada.</p>
+            </div>
+            <div class="meal">
+                <h3>Lanche da tarde</h3>
+                <p>Bolo de chocolate e suco.</p>
+            </div>
+        </div>
+
+        <div class="day">
+            <h2>Terça-feira</h2>
+            <div class="meal">
+                <h3>Lanche da manhã</h3>
+                <p>Pão francês com carne moída e suco.</p>
+            </div>
+            <div class="meal">
+                <h3>Almoço</h3>
+                <p>Arroz, purê de batata com carne moída e salada.</p>
+            </div>
+            <div class="meal">
+                <h3>Lanche da tarde</h3>
+                <p>Creme de goiaba e pão de forma com manteiga.</p>
+            </div>
+        </div>
+
+        <div class="day">
+            <h2>Quarta-feira</h2>
+            <div class="meal">
+                <h3>Lanche da manhã</h3>
+                <p>Cuscuz com margarina e suco.</p>
+            </div>
+            <div class="meal">
+                <h3>Almoço</h3>
+                <p>Arroz mata verde e feijão de caldo.</p>
+            </div>
+            <div class="meal">
+                <h3>Lanche da tarde</h3>
+                <p>Iogurte e frutas (melancia e banana).</p>
+            </div>
+        </div>
+
+        <div class="day">
+            <h2>Quinta-feira</h2>
+            <div class="meal">
+                <h3>Lanche da manhã</h3>
+                <p>Canjica.</p>
+            </div>
+            <div class="meal">
+                <h3>Almoço</h3>
+                <p>Arroz, feijão, carne moída com picadinho de verduras (batata, chuchu, cenoura). Sobremesa: melancia.</p>
+            </div>
+            <div class="meal">
+                <h3>Lanche da tarde</h3>
+                <p>Suco com pão de forma e manteiga.</p>
+            </div>
+        </div>
+
+        <div class="day">
+            <h2>Sexta-feira</h2>
+            <div class="meal">
+                <h3>Lanche da manhã</h3>
+                <p>Achocolatado e torrada com geleia.</p>
+            </div>
+            <div class="meal">
+                <h3>Almoço</h3>
+                <p>Baiano de dois, salada de acelga, tomate e pepino.</p>
+            </div>
+            <div class="meal">
+                <h3>Lanche da tarde</h3>
+                <p>Torrada e frutas (melancia e maçã).</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Cardápio Escola do Futuro</p>
+        </div>
+    </div>
+
+</body>
+</html>
